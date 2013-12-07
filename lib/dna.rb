@@ -35,6 +35,10 @@ class Dna
     end
   end
 
+  def to_s
+    "'#{genes}' = #{fitness.to_f.round(2)}"
+  end
+
 private
 
   def random_letter

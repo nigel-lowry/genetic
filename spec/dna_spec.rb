@@ -67,4 +67,12 @@ describe Dna do
       subject.fitness.should == 1
     end
   end
+
+  describe "#to_s" do
+    subject { Dna.new }
+    it "is the genes then the fitness" do
+      subject.stub(:genes).and_return('xo be or not to be')
+      subject.to_s.should == "'xo be or not to be' = 0.94"
+    end
+  end
 end
