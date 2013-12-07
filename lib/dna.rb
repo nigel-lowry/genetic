@@ -7,11 +7,9 @@ class Dna
   @@ALPHABET = ('a'..'z').to_a + [' ']
 
   def initialize options={}
-    options.assert_valid_keys :target_phrase, :genes
-    @target_phrase = options[:target_phrase] || 'to be or not to be'
-    @genes = options[:genes] || @target_phrase.length.times.map { random_letter }.join
-
-    raise unless @target_phrase.length == @genes.length
+    assert_valid_keys options
+    assign_target_phrase_and_genes options
+    assert_same_length
   end
 
   def fitness
@@ -29,6 +27,19 @@ class Dna
   end
 
 private
+
+  def assert_valid_keys options
+    options.assert_valid_keys :target_phrase, :genes
+  end
+
+  def assign_target_phrase_and_genes(options)
+    @target_phrase = options[:target_phrase] || 'to be or not to be'
+    @genes = options[:genes] || @target_phrase.length.times.map { random_letter }.join
+  end
+
+  def assert_same_length
+    raise unless @target_phrase.length == @genes.length
+  end
 
   def random_letter
     @@ALPHABET.sample
