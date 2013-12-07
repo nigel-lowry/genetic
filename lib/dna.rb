@@ -11,11 +11,10 @@ class Dna
   end
 
   def fitness
-
     number_of_letters_in_correct_position = 0
 
     @phrase.chars.each_index do |index|
-      number_of_letters_in_correct_position += 1 if @@TARGET_PHRASE[index] == phrase[index]
+      number_of_letters_in_correct_position += 1 if character_in_correct_position? index
     end
 
     number_of_letters_in_correct_position / @@TARGET_PHRASE.length
@@ -25,5 +24,9 @@ private
 
   def random_letter
     @@ALPHABET.sample
+  end
+
+  def character_in_correct_position? index
+    @@TARGET_PHRASE[index] == phrase[index]
   end
 end
