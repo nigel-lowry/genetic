@@ -20,6 +20,10 @@ class Dna
     number_of_letters_in_correct_position / @@TARGET_PHRASE.length
   end
 
+  def crossover partner
+    @genes.chars.each_index { |index| [self, partner].sample.genes[index] }.join
+  end
+
 private
 
   def random_letter
