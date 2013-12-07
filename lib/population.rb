@@ -21,6 +21,7 @@ class Population
     population.times do
       parents = pick_parents_based_on_fitness
       child = parents.first.crossover parents.second
+      child.mutate
       dnas.push child
     end
 
