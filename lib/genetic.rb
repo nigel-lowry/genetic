@@ -1,9 +1,14 @@
 require "genetic/version"
+require 'population'
+require 'dna'
 
 module Genetic
   class Driver
     def start
-      # TODO
+      population = Population.new
+      until population.finished?
+        puts population.best.genes
+      end
     end
   end
 end

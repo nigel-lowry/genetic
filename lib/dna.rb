@@ -1,4 +1,5 @@
 require 'mathn'
+require 'set'
 require 'active_support/all'
 
 class Dna

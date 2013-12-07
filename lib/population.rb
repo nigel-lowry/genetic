@@ -40,7 +40,7 @@ class Population
   end
 
   def best
-    @dnas.max_by :fitness
+    @dnas.max_by &:fitness
   end
 
   def finished?
