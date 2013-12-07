@@ -13,16 +13,16 @@ class Population
 
     @dnas = []
     # TODO should we assign mutation rate too?
-    population.times { @dnas.push Dna.new target_phrase: target_phrase }
+    @population.times { @dnas.push Dna.new target_phrase: target_phrase }
     @generations = 0
   end
 
   def generate
-    population.times do
+    @population.times do
       parents = pick_parents_based_on_fitness
       child = parents.first.crossover parents.second
       child.mutate
-      dnas.push child
+      @dnas.push child
     end
 
     @generations += 1
@@ -30,16 +30,14 @@ class Population
   end
 
   def pick_parents_based_on_fitness
-    fitness_total = @dnas.sum &:fitness
-    scalar = 1.0 / fitness_total
+    mating_pool = []
 
-    dna_to_scaled_fitness = {}
-    @dnas.each {|dna| dna_to_scaled_fitness.store dna, dna.fitness * scalar }
+    @dnas.each do |dna|
+      n = (dna.fitness * 100).to_i
+      n.times { mating_pool.push dna }
+    end
 
-    simulator = Simulator.new dna_to_scaled_fitness
-
-    # TODO could be the same
-    [simulator.outcome, simulator.outcome]
+    mating_pool.sample 2
   end
 
   def best
