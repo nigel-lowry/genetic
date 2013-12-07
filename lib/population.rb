@@ -46,9 +46,8 @@ class Population
 
   def choose_fit_parent mating_pool
     while true
-      probability = rand
       sample = mating_pool.sample
-      return sample if sample.fitness > probability
+      return sample if sample.fitness > rand
     end
   end
 
