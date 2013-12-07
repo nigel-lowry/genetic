@@ -21,7 +21,9 @@ class Dna
   end
 
   def crossover partner
-    @genes.chars.each_index { |index| [self, partner].sample.genes[index] }.join
+    child = Dna.new
+    child.genes = @genes.chars.each_index { |index| [self, partner].sample.genes[index] }.join
+    child
   end
 
 private
