@@ -10,7 +10,7 @@ class Population
 
     @dnas = []
     # TODO should we assign mutation rate too?
-    population.times { dnas.push Dna.new target_phrase: target_phrase }
+    population.times { @dnas.push Dna.new target_phrase: target_phrase }
     @generations = 0
   end
 
