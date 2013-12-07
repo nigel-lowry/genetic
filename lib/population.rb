@@ -46,7 +46,8 @@ class Population
 private
 
   def pick_parents_based_on_fitness
-    mating_pool = @current_generation.uniq # might only be one
+    mating_pool = @current_generation.uniq
+    return [mating_pool.first, mating_pool.first] if mating_pool.one?
 
     mum = choose_fit_parent mating_pool
     dad = choose_fit_parent mating_pool - [mum]
