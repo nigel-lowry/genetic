@@ -39,6 +39,10 @@ describe Dna do
         end
       end
     end
+
+    it "raises error with unrecognised symbol" do
+      expect { Dna.new foo: 'abc' }.to raise_error
+    end
   end
 
   describe "#fitness" do

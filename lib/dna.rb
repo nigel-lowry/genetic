@@ -1,4 +1,5 @@
 require 'mathn'
+require 'active_support/all'
 
 class Dna
   attr_reader :genes, :target_phrase
@@ -6,6 +7,7 @@ class Dna
   @@ALPHABET = ('a'..'z').to_a + [' ']
 
   def initialize options={}
+    options.assert_valid_keys :target_phrase, :genes
     @target_phrase = options[:target_phrase] || 'to be or not to be'
     @genes = options[:genes] || @target_phrase.length.times.map { random_letter }.join
 
