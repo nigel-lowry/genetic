@@ -18,6 +18,8 @@ class Population
   end
 
   def generate
+    next_generation = []
+
     @population.times do
       parents = pick_parents_based_on_fitness
       mum = parents.first
@@ -25,8 +27,10 @@ class Population
 
       child = mum.crossover dad
       child.mutate
-      @current_generation.push child
+      next_generation.push child
     end
+
+    @current_generation.replace next_generation
 
     @generations += 1
   end
