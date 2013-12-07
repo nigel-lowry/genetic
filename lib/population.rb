@@ -36,14 +36,13 @@ class Population
   end
 
   def pick_parents_based_on_fitness
-    mating_pool = []
+    mating_pool = @current_generation.uniq # might only be one
 
-    @current_generation.each do |dna|
-      n = (dna.fitness * 100).to_i # TODO bit dangerous
-      n.times { mating_pool.push dna }
+    while true
+      probability = rand
+      samples = mating_pool.sample 2
+      return samples if samples.all? { |sample| sample.fitness > probability }
     end
-
-    mating_pool.sample 2
   end
 
   def best
