@@ -14,3 +14,4 @@ group :development do
 end
 
 gem 'activesupport'
+gem 'random_outcome'
