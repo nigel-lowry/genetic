@@ -7,9 +7,9 @@ class Dna
   @@ALPHABET = ('a'..'z').to_a + [' ']
   @@MUTATION_RATE = 0.01
 
-  def initialize options={}
-    assert_valid_keys options
-    assign_target_phrase_and_genes options
+  def initialize target_phrase: 'to be or not to be', genes: target_phrase.length.times.map { random_letter }.join
+    @target_phrase = target_phrase
+    @genes = genes
     assert_same_length
     assert_alphabet_covers_target_phrase
   end
@@ -34,16 +34,7 @@ class Dna
     end
   end
 
-  private
-
-  def assert_valid_keys options
-    options.assert_valid_keys :target_phrase, :genes
-  end
-
-  def assign_target_phrase_and_genes(options)
-    @target_phrase = options[:target_phrase] || 'to be or not to be'
-    @genes = options[:genes] || @target_phrase.length.times.map { random_letter }.join
-  end
+private
 
   def assert_same_length
     raise unless @target_phrase.length == @genes.length
