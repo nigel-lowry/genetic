@@ -1,15 +1,16 @@
 class Dna
   attr_reader :phrase
 
-  @@CHARACTERS = ('a'..'z').to_a + [' ']
+  @@ALPHABET = ('a'..'z').to_a + [' ']
+  @@TARGET_PHRASE = 'to be or not to be'
 
   def initialize
-    @phrase = 18.times.map { random_letter }.join
+    @phrase = @@TARGET_PHRASE.length.times.map { random_letter }.join
   end
 
 private
 
   def random_letter
-    @@CHARACTERS.sample
+    @@ALPHABET.sample
   end
 end
