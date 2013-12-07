@@ -29,11 +29,11 @@ class Dna
 
   def mutate
     @genes.chars.each_index do |index|
-      @genes[index] = random_letter if rand < @@MUTATION_RATE
+      @genes[index] = random_letter if mutated?
     end
   end
 
-private
+  private
 
   def assert_valid_keys options
     options.assert_valid_keys :target_phrase, :genes
@@ -54,5 +54,9 @@ private
 
   def character_in_correct_position? index
     target_phrase[index] == genes[index]
+  end
+
+  def mutated?
+    rand < @@MUTATION_RATE
   end
 end
