@@ -9,6 +9,8 @@ class Population
     @mutation_rate = mutation_rate
     @population = population
 
+    # TODO population must be > 0
+
     @dnas = []
     # TODO should we assign mutation rate too?
     population.times { @dnas.push Dna.new target_phrase: target_phrase }
@@ -16,8 +18,6 @@ class Population
   end
 
   def generate
-    @dnas.clear
-
     population.times do
       parents = pick_parents_based_on_fitness
       child = parents.first.crossover parents.second
@@ -25,6 +25,7 @@ class Population
     end
 
     @generations += 1
+    @dnas.clear
   end
 
   def pick_parents_based_on_fitness
