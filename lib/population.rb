@@ -1,5 +1,5 @@
 require 'mathn'
-require 'simulator'
+require 'set'
 
 class Population
   attr_reader :target_phrase, :mutation_rate, :population
@@ -36,12 +36,19 @@ class Population
   end
 
   def pick_parents_based_on_fitness
-    mating_pool = @current_generation.uniq # might only be one
+    mating_pool = @current_generation.to_set # might only be one
 
+    mum = choose_fit_parent mating_pool
+    dad = choose_fit_parent mating_pool - [mum]
+
+    [mum, dad]
+  end
+
+  def choose_fit_parent mating_pool
     while true
       probability = rand
-      samples = mating_pool.sample 2
-      return samples if samples.all? { |sample| sample.fitness > probability }
+      sample = mating_pool.to_a.sample
+      return sample if sample.fitness > probability
     end
   end
 
