@@ -8,6 +8,7 @@ module Genetic
       population = Population.new
       until population.finished?
         puts population.best.genes
+        population.generate
       end
     end
   end

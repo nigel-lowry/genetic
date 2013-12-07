@@ -1,4 +1,5 @@
 require 'mathn'
+require 'simulator'
 
 class Population
   attr_reader :target_phrase, :mutation_rate, :population
@@ -31,7 +32,7 @@ class Population
     scalar = 1.0 / fitness_total
 
     dna_to_scaled_fitness = {}
-    dna.each {|dna| dna_to_scaled_fitness.store dna, dna.fitness * scalar }
+    @dnas.each {|dna| dna_to_scaled_fitness.store dna, dna.fitness * scalar }
 
     simulator = Simulator.new dna_to_scaled_fitness
 
