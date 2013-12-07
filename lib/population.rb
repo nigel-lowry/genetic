@@ -17,6 +17,14 @@ class Population
     @generations = 0 # TODO move this to Dna class and eventually display ordinal
   end
 
+  def finished?
+    @current_generation.any? { |dna| dna.genes == @target_phrase }
+  end
+
+  def best
+    @current_generation.max_by &:fitness
+  end
+
   def generate
     next_generation = []
 
@@ -35,6 +43,8 @@ class Population
     @generations += 1
   end
 
+private
+
   def pick_parents_based_on_fitness
     mating_pool = @current_generation.uniq # might only be one
 
@@ -49,13 +59,5 @@ class Population
       sample = mating_pool.sample
       return sample if sample.fitness > rand
     end
-  end
-
-  def best
-    @current_generation.max_by &:fitness
-  end
-
-  def finished?
-    @current_generation.any? { |dna| dna.genes == @target_phrase }
   end
 end

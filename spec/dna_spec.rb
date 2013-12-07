@@ -59,7 +59,7 @@ describe Dna do
 
     it "is a percentage when some of the letters are right" do
       subject.stub(:genes).and_return('xo be or not to be')
-      subject.fitness.should == '17/18'.to_r
+      subject.fitness.should == '17/18'.to_r ** 2
     end
 
     it "is one when all of the letters are in the right positions" do
@@ -72,6 +72,7 @@ describe Dna do
     subject { Dna.new }
     it "is the genes then the fitness" do
       subject.stub(:genes).and_return('xo be or not to be')
+      subject.stub(:fitness).and_return(0.94)
       subject.to_s.should == "'xo be or not to be' = 0.94"
     end
   end
