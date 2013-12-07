@@ -1,19 +1,19 @@
 require 'mathn'
 
 class Dna
-  attr_reader :phrase
+  attr_reader :genes
 
   @@ALPHABET = ('a'..'z').to_a + [' ']
   @@TARGET_PHRASE = 'to be or not to be'
 
   def initialize
-    @phrase = @@TARGET_PHRASE.length.times.map { random_letter }.join
+    @genes = @@TARGET_PHRASE.length.times.map { random_letter }.join
   end
 
   def fitness
     number_of_letters_in_correct_position = 0
 
-    @phrase.chars.each_index do |index|
+    @genes.chars.each_index do |index|
       number_of_letters_in_correct_position += 1 if character_in_correct_position? index
     end
 
@@ -27,6 +27,6 @@ private
   end
 
   def character_in_correct_position? index
-    @@TARGET_PHRASE[index] == phrase[index]
+    @@TARGET_PHRASE[index] == genes[index]
   end
 end
