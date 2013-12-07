@@ -1,13 +1,13 @@
 require 'mathn'
 
 class Dna
-  attr_reader :genes
+  attr_reader :genes, :target_phrase
 
   @@ALPHABET = ('a'..'z').to_a + [' ']
-  @@TARGET_PHRASE = 'to be or not to be'
 
-  def initialize
-    @genes = @@TARGET_PHRASE.length.times.map { random_letter }.join
+  def initialize options={}
+    @target_phrase = options[:target_phrase] || 'to be or not to be'
+    @genes = options[:genes] || @target_phrase.length.times.map { random_letter }.join
   end
 
   def fitness
@@ -17,13 +17,11 @@ class Dna
       number_of_letters_in_correct_position += 1 if character_in_correct_position? index
     end
 
-    number_of_letters_in_correct_position / @@TARGET_PHRASE.length
+    number_of_letters_in_correct_position / @target_phrase.length
   end
 
   def crossover partner
-    child = Dna.new
-    child.genes = @genes.chars.each_index { |index| [self, partner].sample.genes[index] }.join
-    child
+    Dna.new genes: @genes.chars.each_index { |index| [self, partner].sample.genes[index] }.join, target_phrase: @target_phrase
   end
 
 private
@@ -33,6 +31,6 @@ private
   end
 
   def character_in_correct_position? index
-    @@TARGET_PHRASE[index] == genes[index]
+    target_phrase[index] == genes[index]
   end
 end
