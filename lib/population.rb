@@ -7,6 +7,7 @@ class Population
   def initialize target_phrase: 'to be or not to be', mutation_rate: 0.01, population: 100
     raise unless population.is_a? Fixnum
     raise unless population > 1
+    raise unless target_phrase.length > 0
     @target_phrase = target_phrase # TODO can't be empty
     @mutation_rate = mutation_rate # TODO must be between 0 and 1
     @population = population # TODO population must be > 0

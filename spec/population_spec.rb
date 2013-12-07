@@ -41,5 +41,17 @@ describe Population do
     it "raises error if population is float" do
       expect { Population.new population: 2.5 }.to raise_error
     end
+
+    it "raises error if target_phrase is empty" do
+      expect { Population.new target_phrase: ''}.to raise_error
+    end
+
+    it "raises error if target_phrase is nil" do
+      expect { Population.new target_phrase: nil}.to raise_error
+    end
+
+    it "raises error if target_phrase is not a string" do
+      expect { Population.new target_phrase: 55}.to raise_error
+    end
   end
 end
