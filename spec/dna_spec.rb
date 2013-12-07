@@ -1,22 +1,32 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe Dna do
-  its('genes.length') { should == "to be or not to be".length }
-
   describe "#initialize" do
+    let(:default_target_phrase) { 'to be or not to be' }
+
     context "no argument" do
       subject { Dna.new }
-      its(:target_phrase) { should == 'to be or not to be' }
-      its(:genes) { should_not == 'to be or not to be' }
+      its(:target_phrase) { should == default_target_phrase }
+      its(:genes) { should_not == default_target_phrase }
+      its('genes.length') { should == default_target_phrase.length }
     end
 
-    context "with one argument" do
-      subject { Dna.new genes: 'ab be or not to be' }
-      its(:target_phrase) { should == 'to be or not to be' }
-      its(:genes) { should == 'ab be or not to be' }
+    context "with genes argument" do
+      let(:genes) { 'ab be or not to be' }
+      subject { Dna.new genes: genes }
+      its(:target_phrase) { should == default_target_phrase }
+      its(:genes) { should == genes }
     end
 
-    context "with two arguments" do
+    context "with target_phrase argument" do
+      let(:target_phrase) { 'barry butler is a pub landlord' }
+      subject { Dna.new target_phrase: target_phrase }
+      its(:target_phrase) { should == target_phrase }
+      its(:genes) { should_not == target_phrase }
+      its('genes.length') { should == target_phrase.length }
+    end
+
+    context "with both arguments" do
       subject { Dna.new target_phrase: 'abc', genes: 'def' }
       its(:target_phrase) { should == 'abc' }
       its(:genes) { should == 'def' }
