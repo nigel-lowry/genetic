@@ -8,10 +8,10 @@ class Dna
   @@MUTATION_RATE = 0.01
 
   def initialize target_phrase: 'to be or not to be', genes: target_phrase.length.times.map { random_letter }.join
+    raise unless target_phrase.length == genes.length
+    raise unless target_phrase.chars.all? { |character| character.in? @@ALPHABET }
     @target_phrase = target_phrase
     @genes = genes
-    assert_same_length
-    assert_alphabet_covers_target_phrase
   end
 
   def fitness
@@ -35,14 +35,6 @@ class Dna
   end
 
 private
-
-  def assert_same_length
-    raise unless @target_phrase.length == @genes.length
-  end
-
-  def assert_alphabet_covers_target_phrase
-    raise unless @target_phrase.chars.all? { |character| character.in? @@ALPHABET }
-  end
 
   def random_letter
     @@ALPHABET.sample
