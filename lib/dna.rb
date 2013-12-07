@@ -11,6 +11,7 @@ class Dna
     assert_valid_keys options
     assign_target_phrase_and_genes options
     assert_same_length
+    assert_alphabet_covers_target_phrase
   end
 
   def fitness
@@ -46,6 +47,10 @@ class Dna
 
   def assert_same_length
     raise unless @target_phrase.length == @genes.length
+  end
+
+  def assert_alphabet_covers_target_phrase
+    raise unless @target_phrase.chars.all? { |character| character.in? @@ALPHABET }
   end
 
   def random_letter

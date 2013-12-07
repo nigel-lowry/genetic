@@ -24,6 +24,12 @@ describe Dna do
       its(:target_phrase) { should == target_phrase }
       its(:genes) { should_not == target_phrase }
       its('genes.length') { should == target_phrase.length }
+
+      context "that has letters outside alphabet" do
+        it "raises error" do
+          expect { Dna.new target_phrase: 'hello!!!' }.to raise_error
+        end
+      end
     end
 
     context "with both arguments" do
