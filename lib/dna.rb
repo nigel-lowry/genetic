@@ -5,6 +5,7 @@ class Dna
   attr_reader :genes, :target_phrase
 
   @@ALPHABET = ('a'..'z').to_a + [' ']
+  @@MUTATION_RATE = 0.01
 
   def initialize options={}
     assert_valid_keys options
@@ -24,6 +25,12 @@ class Dna
 
   def crossover partner
     Dna.new genes: @genes.chars.each_index { |index| [self, partner].sample.genes[index] }.join, target_phrase: @target_phrase
+  end
+
+  def mutate
+    @genes.chars.each_index do |index|
+      @genes[index] = random_letter if rand < @@MUTATION_RATE
+    end
   end
 
 private
