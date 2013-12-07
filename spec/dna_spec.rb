@@ -27,9 +27,17 @@ describe Dna do
     end
 
     context "with both arguments" do
-      subject { Dna.new target_phrase: 'abc', genes: 'def' }
-      its(:target_phrase) { should == 'abc' }
-      its(:genes) { should == 'def' }
+      context "same length" do
+        subject { Dna.new target_phrase: 'abc', genes: 'def' }
+        its(:target_phrase) { should == 'abc' }
+        its(:genes) { should == 'def' }
+      end
+
+      context "different length" do
+        it "raises error" do
+          expect { Dna.new target_phrase: 'abc', genes: 'defg' }.to raise_error
+        end
+      end
     end
   end
 

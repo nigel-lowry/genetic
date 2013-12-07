@@ -8,6 +8,8 @@ class Dna
   def initialize options={}
     @target_phrase = options[:target_phrase] || 'to be or not to be'
     @genes = options[:genes] || @target_phrase.length.times.map { random_letter }.join
+
+    raise unless @target_phrase.length == @genes.length
   end
 
   def fitness
