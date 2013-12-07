@@ -16,13 +16,18 @@ class Dna
   end
 
   def fitness
+    f = number_of_characters_in_correct_position / @target_phrase.length
+    f * f
+  end
+
+  def number_of_characters_in_correct_position
     number_of_letters_in_correct_position = 0
 
     @genes.chars.each_index do |index|
       number_of_letters_in_correct_position += 1 if character_in_correct_position? index
     end
 
-    number_of_letters_in_correct_position / @target_phrase.length
+    number_of_letters_in_correct_position
   end
 
   def crossover partner
