@@ -1,5 +1,9 @@
 require "genetic/version"
 
 module Genetic
-  # Your code goes here...
+  class Driver
+    def start
+      # TODO
+    end
+  end
 end

@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'genetic'
+
+driver = Genetic::Driver.new
+driver.start

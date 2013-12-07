@@ -8,13 +8,13 @@ Gem::Specification.new do |spec|
   spec.version       = Genetic::VERSION
   spec.authors       = ["Nigel Lowry"]
   spec.email         = ["nigel-lowry@ultra.eclipse.co.uk"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Genetic algorithm gem}
+  spec.summary       = %q{Gem that uses a genetic algorithm. If someone wants to make this more general-purpose, please do}
   spec.homepage      = ""
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.executables   = ["genetic"]
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
