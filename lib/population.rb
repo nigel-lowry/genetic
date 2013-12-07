@@ -36,7 +36,7 @@ class Population
   end
 
   def pick_parents_based_on_fitness
-    mating_pool = @current_generation.to_set # might only be one
+    mating_pool = @current_generation.uniq # might only be one
 
     mum = choose_fit_parent mating_pool
     dad = choose_fit_parent mating_pool - [mum]
@@ -47,7 +47,7 @@ class Population
   def choose_fit_parent mating_pool
     while true
       probability = rand
-      sample = mating_pool.to_a.sample
+      sample = mating_pool.sample
       return sample if sample.fitness > probability
     end
   end
