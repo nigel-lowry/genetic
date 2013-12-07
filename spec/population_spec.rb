@@ -4,11 +4,18 @@ describe Population do
 
   describe "#initialize" do
 
-    context "setting and getting" do
+    context "with values" do
       subject { Population.new target_phrase: 'foobar', mutation_rate: 0.05, population: 200 }
       its(:target_phrase) { should == 'foobar' }
       its(:mutation_rate) { should == 0.05 }
       its(:population) { should == 200 }
+    end
+
+    context "without values" do
+      subject { Population.new }
+      its(:target_phrase) { should == 'to be or not to be' }
+      its(:mutation_rate) { should == 0.01 }
+      its(:population) { should == 100 }
     end
 
     it "raises error if given bad symbol" do
