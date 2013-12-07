@@ -6,7 +6,7 @@ class Dna
   attr_reader :genes, :target_phrase
 
   @@ALPHABET = ('a'..'z').to_a + [' ']
-  @@MUTATION_RATE = 0.01
+  @@MUTATION_RATE = 0.01 # TODO pass in
 
   def initialize target_phrase: 'to be or not to be', genes: target_phrase.length.times.map { random_letter }.join
     raise unless target_phrase.length == genes.length
