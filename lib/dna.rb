@@ -9,7 +9,7 @@ class Dna
 
   def initialize target_phrase: 'to be or not to be', genes: target_phrase.length.times.map { random_letter }.join
     raise unless target_phrase.length == genes.length
-    raise unless target_phrase.chars.all? { |character| character.in? @@ALPHABET }
+    raise unless target_phrase.chars.to_set.subset? @@ALPHABET.to_set
     @target_phrase = target_phrase
     @genes = genes
   end
