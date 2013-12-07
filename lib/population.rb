@@ -14,7 +14,7 @@ class Population
     @current_generation = []
     # TODO should we assign mutation rate too?
     @population.times { @current_generation.push Dna.new target_phrase: target_phrase }
-    @generations = 0
+    @generations = 0 # TODO move this to Dna class and eventually display ordinal
   end
 
   def generate
