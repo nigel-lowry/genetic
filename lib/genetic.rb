@@ -6,7 +6,7 @@ module Genetic
   class Driver
     def start
       population = Population.new
-      population.start
+      population.generate
 
       until population.finished?
         puts "#{population.generations} #{population.best}"

@@ -13,14 +13,9 @@ class Population
     @target_phrase = target_phrase
     @mutation_rate = mutation_rate
     @population = population
-  end
 
-  def start
+    @generations = 0
     @current_generation = []
-    # TODO should we assign mutation rate too?
-    @population.times { @current_generation.push Dna.new target_phrase: target_phrase }
-    @generations = 0 # TODO move this to Dna class and eventually display ordinal
-    @total_fitness = @current_generation.sum &:fitness
   end
 
   def finished?
@@ -32,6 +27,24 @@ class Population
   end
 
   def generate
+    if @generations.zero?
+      first_generation
+    else
+      subsequent_generation
+    end
+
+    @total_fitness = @current_generation.sum &:fitness
+    @generations += 1
+  end
+
+private
+
+  def first_generation
+    # TODO should we assign mutation rate too?
+    @population.times { @current_generation.push Dna.new target_phrase: target_phrase }
+  end
+
+  def subsequent_generation
     next_generation = []
 
     @population.times do
@@ -45,12 +58,7 @@ class Population
     end
 
     @current_generation.replace next_generation
-    @total_fitness = @current_generation.sum &:fitness
-
-    @generations += 1
   end
-
-private
 
   def pick_parents_based_on_fitness
     outcome_to_normalized_fitness = {}
