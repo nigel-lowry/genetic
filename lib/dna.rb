@@ -40,7 +40,7 @@ class Dna
   end
 
   def to_s
-    "'#{genes}' = #{fitness.to_f.round(2)}"
+    "'#{genes}' = #{fitness}"
   end
 
 private
