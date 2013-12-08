@@ -34,8 +34,7 @@ class Population
     end
 
     @generations += 1
-    @outcome_to_normalized_fitness = {}
-    @current_generation.each {|dna| @outcome_to_normalized_fitness.store dna, dna.fitness / @current_generation.sum(&:fitness) }
+    @outcome_to_normalized_fitness = @current_generation.each_with_object({}) {|dna, hash| hash[dna] = dna.fitness / @current_generation.sum(&:fitness) }
   end
 
 private
