@@ -61,6 +61,16 @@ private
     outcome_to_normalized_fitness = {}
     @current_generation.each {|dna| outcome_to_normalized_fitness.store dna, dna.fitness / @total_fitness }
     simulator = Simulator.new outcome_to_normalized_fitness
-    [simulator.outcome, simulator.outcome]
+
+    first = simulator.outcome
+
+    if @current_generation.all? {|dna| dna.genes == first.genes }
+      [first, simulator.outcome]
+    else
+      loop do
+        second = simulator.outcome
+        return [first, second] unless first.genes == second.genes
+      end
+    end
   end
 end
