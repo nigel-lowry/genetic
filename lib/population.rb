@@ -20,6 +20,7 @@ class Population
     # TODO should we assign mutation rate too?
     @population.times { @current_generation.push Dna.new target_phrase: target_phrase }
     @generations = 0 # TODO move this to Dna class and eventually display ordinal
+    @total_fitness = @current_generation.sum &:fitness
   end
 
   def finished?
@@ -44,6 +45,7 @@ class Population
     end
 
     @current_generation.replace next_generation
+    @total_fitness = @current_generation.sum &:fitness
 
     @generations += 1
   end
@@ -51,9 +53,8 @@ class Population
 private
 
   def pick_parents_based_on_fitness
-    total_fitness = @current_generation.sum &:fitness
     outcome_to_normalized_fitness = {}
-    @current_generation.each {|dna| outcome_to_normalized_fitness.store dna, dna.fitness / total_fitness }
+    @current_generation.each {|dna| outcome_to_normalized_fitness.store dna, dna.fitness / @total_fitness }
     simulator = Simulator.new outcome_to_normalized_fitness
     [simulator.outcome, simulator.outcome]
   end
