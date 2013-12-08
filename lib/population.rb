@@ -40,8 +40,7 @@ class Population
 private
 
   def first_generation
-    # TODO should we assign mutation rate too?
-    @population.times { @current_generation.push Dna.new target_phrase: target_phrase }
+    @population.times { @current_generation.push Dna.new target_phrase: @target_phrase, mutation_rate: @mutation_rate }
   end
 
   def subsequent_generation
