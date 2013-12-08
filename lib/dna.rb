@@ -3,16 +3,16 @@ require 'set'
 require 'active_support/all'
 
 class Dna
-  attr_reader :genes, :target_phrase
+  attr_reader :genes, :target_phrase, :mutation_rate
 
   @@ALPHABET = ('a'..'z').to_a + [' ']
-  @@MUTATION_RATE = 0.01 # TODO pass in
 
-  def initialize target_phrase: 'to be or not to be', genes: target_phrase.length.times.map { random_letter }.join
+  def initialize target_phrase: 'to be or not to be', genes: target_phrase.length.times.map { random_letter }.join, mutation_rate: 0.01
     raise unless target_phrase.length == genes.length
     raise unless target_phrase.chars.to_set.subset? @@ALPHABET.to_set
     @target_phrase = target_phrase
     @genes = genes
+    @mutation_rate = mutation_rate
   end
 
   def fitness
@@ -54,6 +54,6 @@ private
   end
 
   def mutant_gene?
-    rand < @@MUTATION_RATE
+    rand < @mutation_rate
   end
 end

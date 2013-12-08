@@ -9,6 +9,7 @@ describe Dna do
       its(:target_phrase) { should == default_target_phrase }
       its(:genes) { should_not == default_target_phrase }
       its('genes.length') { should == default_target_phrase.length }
+      its(:mutation_rate) { should == 0.01 }
     end
 
     context "with genes argument" do
@@ -32,7 +33,7 @@ describe Dna do
       end
     end
 
-    context "with both arguments" do
+    context "with both string arguments" do
       context "same length" do
         subject { Dna.new target_phrase: 'abc', genes: 'def' }
         its(:target_phrase) { should == 'abc' }
@@ -44,6 +45,11 @@ describe Dna do
           expect { Dna.new target_phrase: 'abc', genes: 'defg' }.to raise_error
         end
       end
+    end
+
+    context "with mutation argument" do
+      subject { Dna.new mutation_rate: 0.02 }
+      its(:mutation_rate) { should == 0.02 }
     end
 
     it "raises error with unrecognised symbol" do
