@@ -53,5 +53,25 @@ describe Population do
     it "raises error if target_phrase is not a string" do
       expect { Population.new target_phrase: 55}.to raise_error
     end
+
+    it "raises error if mutation_rate is negative" do
+      expect { Population.new mutation_rate: -0.1}.to raise_error
+    end
+
+    it "doesn't error if mutation_rate is zero" do
+      expect { Population.new mutation_rate: 0.0}.to_not raise_error
+    end
+
+    it "doesn't error if mutation_rate is in range" do
+      expect { Population.new mutation_rate: 0.15}.to_not raise_error
+    end
+
+    it "doesn't error if mutation_rate is one" do
+      expect { Population.new mutation_rate: 1.0}.to_not raise_error
+    end
+
+    it "raises error if mutation_rate is more than one" do
+      expect { Population.new mutation_rate: 1.1}.to raise_error
+    end
   end
 end

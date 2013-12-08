@@ -8,6 +8,7 @@ class Population
     raise unless population.is_a? Fixnum
     raise unless population > 1
     raise unless target_phrase.length > 0
+    raise unless mutation_rate.in? 0.0..1.0
     @target_phrase = target_phrase # TODO can't be empty
     @mutation_rate = mutation_rate # TODO must be between 0 and 1
     @population = population # TODO population must be > 0
