@@ -35,7 +35,7 @@ class Dna
 
   def mutate
     @genes.chars.each_index do |index|
-      @genes[index] = random_letter if mutated?
+      @genes[index] = random_letter if mutant_gene?
     end
   end
 
@@ -53,7 +53,7 @@ private
     target_phrase[index] == genes[index]
   end
 
-  def mutated?
+  def mutant_gene?
     rand < @@MUTATION_RATE
   end
 end
