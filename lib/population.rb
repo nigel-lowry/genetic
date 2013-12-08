@@ -33,8 +33,9 @@ class Population
       subsequent_generation
     end
 
-    @total_fitness = @current_generation.sum &:fitness
     @generations += 1
+    @outcome_to_normalized_fitness = {}
+    @current_generation.each {|dna| @outcome_to_normalized_fitness.store dna, dna.fitness / @current_generation.sum(&:fitness) }
   end
 
 private
@@ -46,9 +47,6 @@ private
 
   def subsequent_generation
     next_generation = []
-
-    @outcome_to_normalized_fitness = {}
-    @current_generation.each {|dna| @outcome_to_normalized_fitness.store dna, dna.fitness / @total_fitness }
 
     @population.times do
       parents = pick_parents_based_on_fitness
