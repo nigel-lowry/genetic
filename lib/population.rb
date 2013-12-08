@@ -49,10 +49,7 @@ private
 
     @population.times do
       parents = pick_parents_based_on_fitness
-      mum = parents.first
-      dad = parents.last
-
-      child = mum.crossover dad
+      child = parents.first.crossover parents.last
       child.mutate
       next_generation.push child
     end
