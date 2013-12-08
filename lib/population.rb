@@ -1,5 +1,6 @@
 require 'mathn'
 require 'set'
+require 'simulator'
 
 class Population
   attr_reader :target_phrase, :mutation_rate, :population, :generations
@@ -50,13 +51,11 @@ class Population
 private
 
   def pick_parents_based_on_fitness
-    mating_pool = @current_generation.uniq
-    return [mating_pool.first, mating_pool.first] if mating_pool.one?
-
-    mum = choose_fit_parent mating_pool
-    dad = choose_fit_parent mating_pool - [mum]
-
-    [mum, dad]
+    total_fitness = @current_generation.sum &:fitness
+    outcome_to_normalized_fitness = {}
+    @current_generation.each {|dna| outcome_to_normalized_fitness.store dna, dna.fitness / total_fitness }
+    simulator = Simulator.new outcome_to_normalized_fitness
+    [simulator.outcome, simulator.outcome]
   end
 
   def choose_fit_parent mating_pool

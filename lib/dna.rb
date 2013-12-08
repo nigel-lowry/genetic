@@ -16,8 +16,7 @@ class Dna
   end
 
   def fitness
-    f = number_of_characters_in_correct_position / @target_phrase.length
-    f ** 2
+    2 ** number_of_characters_in_correct_position
   end
 
   def number_of_characters_in_correct_position
