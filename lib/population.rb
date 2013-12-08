@@ -58,11 +58,4 @@ private
     simulator = Simulator.new outcome_to_normalized_fitness
     [simulator.outcome, simulator.outcome]
   end
-
-  def choose_fit_parent mating_pool
-    while true
-      sample = mating_pool.sample
-      return sample if sample.fitness > rand
-    end
-  end
 end
