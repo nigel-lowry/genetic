@@ -2,7 +2,7 @@ require 'mathn'
 require 'set'
 
 class Population
-  attr_reader :target_phrase, :mutation_rate, :population
+  attr_reader :target_phrase, :mutation_rate, :population, :generations
 
   def initialize target_phrase: 'to be or not to be', mutation_rate: 0.01, population: 100
     raise unless population.is_a? Fixnum

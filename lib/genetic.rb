@@ -7,8 +7,9 @@ module Genetic
     def start
       population = Population.new
       population.start
+
       until population.finished?
-        puts population.best
+        puts "#{population.generations} #{population.best}"
         population.generate
       end
     end
