@@ -1,4 +1,4 @@
-require "genetic/version"
+require 'genetic/version'
 require 'population'
 require 'dna'
 
